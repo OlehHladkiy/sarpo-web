@@ -1,0 +1,18 @@
+{
+  "plugins": ["babel-plugin-styled-components", "react-loadable/babel"],
+  "presets": [
+    ["react-app", { "absoluteRuntime": false }],
+    [
+      "@babel/preset-typescript",
+      {
+        "isTSX": true,
+        "allExtensions": true
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["require-context-hook"]
+    }
+  }
+}
