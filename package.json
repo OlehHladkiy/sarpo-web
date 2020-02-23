@@ -57,6 +57,8 @@
     "url-loader": "2.3.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@svgr/webpack": "4.3.3",
     "@typescript-eslint/parser": "^2.10.0",
     "babel-eslint": "10.0.3",
@@ -76,6 +78,7 @@
     "eslint-plugin-react": "7.18.0",
     "eslint-plugin-react-hooks": "^2.4.0",
     "html-webpack-plugin": "4.0.0-beta.11",
+    "husky": "^4.2.3",
     "jest-resolve": "24.9.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.0",
@@ -87,5 +90,10 @@
     "webpack-dev-server": "3.10.2",
     "webpack-manifest-plugin": "2.2.0",
     "workbox-webpack-plugin": "4.3.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
