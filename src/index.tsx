@@ -1,6 +1,25 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+// import * as React from 'react';
+// import * as ReactDOM from 'react-dom';
 
-const App = () => <div>asdfasdf</div>;
+// import App from './App';
+// import { unregister } from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+// const mountEl = document.getElementById('root');
+
+// const render = () => {
+//   if (mountEl) {
+//     return ReactDOM.render(<App />, mountEl);
+//   }
+
+//   throw new Error('React failed to mount, because mount element is missing');
+// };
+
+// unregister();
+
+// render();
+
+// if (module.hot) {
+//   module.hot.accept('./App', () => {
+//     render();
+//   });
+// }
