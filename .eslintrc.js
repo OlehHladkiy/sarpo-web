@@ -10,8 +10,6 @@ module.exports = {
   extends: [
     'react-app',
     'prettier',
-    'plugin:import/errors',
-    'plugin:import/warnings',
   ],
   env: {
     browser: true,
@@ -25,9 +23,8 @@ module.exports = {
     google: true,
   },
   rules: {
-    'prettier/prettier': 'error',
     // General
-    'comma-dangle': ['warn', 'always-multiline'],
+    'comma-dangle': ['error', 'always-multiline'],
     'global-require': 'warn',
     'key-spacing': 'off',
     'max-len': ['warn', 180, 4],
@@ -56,7 +53,6 @@ module.exports = {
     'fp/no-valueof-field': 'error',
     // Import
     'import/named': 'off',
-    'import/no-unused-modules': [1, {"unusedExports": true}],
     // JSX a11y
     'jsx-a11y/href-no-hash': 'off',
     // Ramda
