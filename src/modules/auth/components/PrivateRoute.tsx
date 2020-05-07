@@ -20,7 +20,7 @@ const PrivateRoute: React.SFC<PrivateRouteProps> = ({
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/signIn');
+      history.push('/signin');
       return;
     }
   }, [history, isAuthenticated]);
@@ -33,7 +33,7 @@ const PrivateRoute: React.SFC<PrivateRouteProps> = ({
           return <Component {...props} />;
         }
 
-        return <Redirect to="/signIn" />;
+        return <Redirect to="/signin" />;
       }}
     />
   );
