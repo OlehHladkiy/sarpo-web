@@ -286,6 +286,7 @@ module.exports = function(webpackEnv) {
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
         '@config': path.resolve('src/config'),
+        '@theme': path.resolve('src/theme'),
         '@components': path.resolve('src/components'),
         '@graphql': path.resolve('src/graphql'),
         '@modules': path.resolve('src/modules'),
