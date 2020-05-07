@@ -2,6 +2,7 @@
 
 import Loadable from 'react-loadable';
 import { REHYDRATE } from 'redux-persist';
+import { SagaIterator } from 'redux-saga';
 import {
   all,
   fork,
@@ -18,18 +19,19 @@ import { fetchMe } from '@modules/user/UserActions';
 
 import { appAuthenticated, appBootstrap, BOOTSTRAP } from './AppActions';
 
-function* appBootstrapSaga(): any {
-  yield putResolve(fetchMe());
+function* appBootstrapSaga(): SagaIterator {
+  const isAuthenticated = yield select(getIsAuthenticated);
+
+  if (isAuthenticated) {
+    yield putResolve(fetchMe());
+  }
   yield put(appBootstrap());
 }
 
-function* appAuthenticatedSaga(): any {
+function* appAuthenticatedSaga(): SagaIterator {
   // eslint-disable-next-line fp/no-loops
   while (true) {
-    yield take([
-      REHYDRATE,
-      `${SIGN_IN}_SUCCESS`,
-    ]);
+    yield take([REHYDRATE, `${SIGN_IN}_SUCCESS`]);
     const isAuthenticated = yield select(getIsAuthenticated);
 
     if (isAuthenticated) {
@@ -38,11 +40,11 @@ function* appAuthenticatedSaga(): any {
   }
 }
 
-function* loadPages() {
+function* loadPages(): SagaIterator {
   yield Loadable.preloadAll();
 }
 
-function* appSagas(): any {
+function* appSagas(): SagaIterator {
   yield all([
     takeLatest(REHYDRATE, appBootstrapSaga),
     fork(appAuthenticatedSaga),

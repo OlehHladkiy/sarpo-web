@@ -2,10 +2,12 @@ export const namespace = 'APP';
 export const BOOTSTRAP = `${namespace}/BOOTSTRAP`;
 export const AUTHENTICATED = `${namespace}/AUTHENTICATED`;
 
-export const appBootstrap = () => ({
+import { Action } from '@store/models';
+
+export const appBootstrap = (): Action => ({
   type: BOOTSTRAP,
 });
 
-export const appAuthenticated = () => ({
+export const appAuthenticated = (): Action => ({
   type: AUTHENTICATED,
 });
