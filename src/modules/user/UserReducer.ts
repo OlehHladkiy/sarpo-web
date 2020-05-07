@@ -1,6 +1,6 @@
 // @flow
 import * as R from 'ramda';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
 import { SIGN_IN, SIGN_UP, SIGN_OUT } from '@modules/auth/AuthActions';
 import { getGraphqlPayload } from '@store/helpers';
@@ -29,13 +29,16 @@ const initialState: UserState = {
   createdAt: null,
 };
 
-const UserReducer = (state: UserState = initialState, action: any) => {
+const UserReducer = (
+  state: UserState = initialState,
+  action: any,
+): UserState => {
   switch (action.type) {
     case `${SIGN_IN}_SUCCESS`:
     case `${SIGN_UP}_SUCCESS`: {
       return R.mergeDeepRight(
         state,
-        R.propOr({}, 'user', getGraphqlPayload(action))
+        R.propOr({}, 'user', getGraphqlPayload(action)),
       );
     }
     case `${FETCH_ME}_SUCCESS`: {
@@ -61,9 +64,13 @@ export const getEmailNotifications = R.pathOr<string>({}, [
   'emailNotifications',
 ]);
 
-export const getProfile = R.path<Object>([STATE_KEY, 'profile']);
+export const getProfile = R.path<Record<string, any>>([STATE_KEY, 'profile']);
 
-export const getRole = R.path<Object>([STATE_KEY, 'profile', 'role']);
+export const getRole = R.path<Record<string, any>>([
+  STATE_KEY,
+  'profile',
+  'role',
+]);
 
 export const getName = R.path<string>([STATE_KEY, 'profile', 'name']);
 
@@ -73,10 +80,10 @@ export const getCreatedDate = R.path<any>([STATE_KEY, 'createdAt']);
 
 export const getIsEmailVerified = R.compose(
   emailConfirmedAt => !!emailConfirmedAt,
-  R.path<boolean>([STATE_KEY, 'emailConfirmedAt'])
+  R.path<boolean>([STATE_KEY, 'emailConfirmedAt']),
 );
 
-export const getIsNotEmailVerifiedAfterDay = (state: any) => {
+export const getIsNotEmailVerifiedAfterDay = (state: any): Moment | boolean => {
   const isEmailVerified = getIsEmailVerified(state);
   if (isEmailVerified) return false;
 
