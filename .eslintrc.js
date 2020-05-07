@@ -1,15 +1,18 @@
 const path = require('path');
 
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 7,
     sourceType: 'module',
-    jsx: true,
+    ecmaFeatures: { jsx: true },
   },
   extends: [
-    'react-app',
     'prettier',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
   ],
   env: {
     browser: true,
@@ -23,8 +26,15 @@ module.exports = {
     google: true,
   },
   rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        tabWidth: 2,
+        singleQuote: true,
+        trailingComma: 'all',
+      }
+    ],
     // General
-    'comma-dangle': ['error', 'always-multiline'],
     'global-require': 'warn',
     'key-spacing': 'off',
     'max-len': ['warn', 180, 4],
@@ -32,7 +42,9 @@ module.exports = {
     'no-multi-spaces': 'off',
     'no-underscore-dangle': 'off',
     'no-var': 'error',
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-explicit-any': 'off',
     // FP
     'fp/no-arguments': 'error',
     'fp/no-class': 'off',
