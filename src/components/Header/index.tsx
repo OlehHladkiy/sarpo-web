@@ -14,8 +14,8 @@ const ToSignRouteMap = {
 };
 
 const SignButtonTitle = {
-  [SignRoute.SignIn]: 'Sign In',
-  [SignRoute.SignUp]: 'Sign Up',
+  [SignRoute.SignIn]: 'Sign Up',
+  [SignRoute.SignUp]: 'Sign In',
 };
 
 const Header: React.FunctionComponent = () => {
