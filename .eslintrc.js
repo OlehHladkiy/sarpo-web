@@ -8,7 +8,6 @@ module.exports = {
     ecmaFeatures: { jsx: true },
   },
   extends: [
-    'prettier',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
