@@ -1,25 +1,26 @@
-// import * as React from 'react';
-// import * as ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
-// import App from './App';
-// import { unregister } from './registerServiceWorker';
+import App from './App';
+import { unregister } from './registerServiceWorker';
 
-// const mountEl = document.getElementById('root');
+const mountEl = document.getElementById('root');
 
-// const render = () => {
-//   if (mountEl) {
-//     return ReactDOM.render(<App />, mountEl);
-//   }
+const render: Function = () => {
+  if (mountEl) {
+    // eslint-disable-next-line react/no-render-return-value
+    return ReactDOM.render(<App />, mountEl);
+  }
 
-//   throw new Error('React failed to mount, because mount element is missing');
-// };
+  throw new Error('React failed to mount, because mount element is missing');
+};
 
-// unregister();
+unregister();
 
-// render();
+render();
 
-// if (module.hot) {
-//   module.hot.accept('./App', () => {
-//     render();
-//   });
-// }
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    render();
+  });
+}
