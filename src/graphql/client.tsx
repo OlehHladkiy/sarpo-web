@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import ApolloClient, { Operation } from 'apollo-boost'; // eslint-disable-line import/no-named-as-default
 import * as R from 'ramda';
 import { parseCookies } from 'nookies';
@@ -11,7 +12,7 @@ const client = new ApolloClient({
     const token = R.propOr(
       R.prop('token', cookies),
       'token',
-      operation.variables
+      operation.variables,
     );
     operation.variables = R.omit(['token'], operation.variables);
 
