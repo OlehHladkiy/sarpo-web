@@ -1,7 +1,7 @@
 import { routerMiddleware } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory, History } from 'history';
 import { applyMiddleware, compose, createStore } from 'redux';
-import { persistStore } from 'redux-persist';
+import { persistStore, Persistor } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 
@@ -14,7 +14,13 @@ import promiseMiddleware from './middlewares/promiseMiddleware';
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
 
-export default (initialState = {}) => {
+interface ConfiguredStore {
+  history: History;
+  persistor: Persistor;
+  store: Record<string, any>;
+}
+
+export default (initialState = {}): ConfiguredStore => {
   const history = createBrowserHistory();
   const sagaMiddleware = createSagaMiddleware();
 
@@ -34,7 +40,7 @@ export default (initialState = {}) => {
   const store = createStore(
     rootReducer(history),
     initialState,
-    compose(applyMiddleware(...middlewares))
+    compose(applyMiddleware(...middlewares)),
   );
   const persistor = persistStore(store);
 

@@ -1,13 +1,13 @@
 import * as R from 'ramda';
 
 export const getGraphqlPayload = (
-  action: Object,
-  defaultPayload: any = null
+  action: Record<string, any>,
+  defaultPayload: any = null,
 ): any => {
   const queryKey = R.pathOr(
     '',
     ['meta', 'previousAction', 'payload', 'key'],
-    action
+    action,
   );
   return R.pathOr(defaultPayload, ['payload', 'data', queryKey], action);
 };

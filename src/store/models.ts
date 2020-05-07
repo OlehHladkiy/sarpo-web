@@ -1,7 +1,7 @@
 export type Action = {
   error?: any;
   meta?: any;
-  payload: any;
+  payload?: any;
   type: string;
 };
 
