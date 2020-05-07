@@ -5,7 +5,7 @@ import AppConfig from '@config/AppConfig';
 
 const axiosClient = axios.create({
   baseURL: AppConfig.apiUrl,
-  responseType: 'json'
+  responseType: 'json',
 });
 
 const axiosMiddlewareOptions = {
@@ -19,13 +19,13 @@ const axiosMiddlewareOptions = {
       //   }
       //   return request;
       // },
-    ]
-  }
+    ],
+  },
 };
 
 const axiosMiddleware = axiosMiddlewareFactory(
   axiosClient,
-  axiosMiddlewareOptions
+  axiosMiddlewareOptions,
 );
 
 export default axiosMiddleware;
