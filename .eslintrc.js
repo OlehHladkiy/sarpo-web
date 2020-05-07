@@ -25,14 +25,6 @@ module.exports = {
     google: true,
   },
   rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        tabWidth: 2,
-        singleQuote: true,
-        trailingComma: 'all',
-      }
-    ],
     // General
     'global-require': 'warn',
     'key-spacing': 'off',
