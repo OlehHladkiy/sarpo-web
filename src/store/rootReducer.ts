@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Reducer } from 'react';
 import * as R from 'ramda';
 import { combineReducers } from 'redux';

@@ -1,4 +1,4 @@
-// @flow
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as R from 'ramda';
 import moment, { Moment } from 'moment';
 

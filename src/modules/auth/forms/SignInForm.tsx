@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Input } from 'antd';
 import { FormInstance } from 'antd/lib/form';
 import React from 'react';
