@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
 
 import { USER_FRAGMENT } from '@modules/user/UserActions';
-import { Action } from '@store/models';
 
 const namespace = 'AUTH';
 
@@ -54,5 +53,3 @@ export const signup: any = payload => ({
     },
   },
 });
-
-export type AuthAction = Action;

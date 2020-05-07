@@ -22,16 +22,19 @@ export const initialState: AuthState = {
   email: null,
 };
 
-const buildAuthData = (user: Object) => ({
+const buildAuthData = (user: Record<string, any>): Record<string, any> => ({
   ...R.compose(
     R.pick(['_id', 'isActive', 'email']),
-    R.pathOr({}, ['user'])
+    R.pathOr({}, ['user']),
   )(user),
   isAuthenticated: true,
   token: R.pathOr(null, ['token'], user),
 });
 
-const AuthReducer = (state: AuthState = initialState, action: any) => {
+const AuthReducer = (
+  state: AuthState = initialState,
+  action: any,
+): AuthState => {
   switch (action.type) {
     case `${SIGN_IN}_SUCCESS`:
     case `${SIGN_UP}_SUCCESS`: {
