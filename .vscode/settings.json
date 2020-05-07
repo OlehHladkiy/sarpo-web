@@ -1,6 +1,5 @@
 {
   "eslint.autoFixOnSave": true,
-  "eslint.validate": ["javascript", "typescript", "typescriptreact"],
   "typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib/",
   "search.exclude": {
     "dist/**/*": true
