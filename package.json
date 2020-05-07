@@ -107,7 +107,6 @@
     "html-webpack-plugin": "4.0.0-beta.11",
     "husky": "^4.2.5",
     "jest-resolve": "24.9.0",
-    "lint-staged": "^10.2.2",
     "nookies": "^2.2.4",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.0",

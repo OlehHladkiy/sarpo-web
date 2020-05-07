@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "NODE_ENV=development lint-staged && yarn lint:js && yarn lint:css"
+    "pre-commit": "NODE_ENV=development yarn lint:js && yarn lint:css"
   }
 }
