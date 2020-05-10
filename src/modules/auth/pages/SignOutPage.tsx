@@ -1,7 +1,18 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-const SignOutPage: React.FunctionComponent = () => {
-  return <div>Sign out page</div>;
+import { signOut } from '../AuthActions';
+
+const LogoutPage: React.FunctionComponent = () => {
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+
+  dispatch(signOut());
+  history.push('/');
+
+  return null;
 };
 
-export default SignOutPage;
+export default LogoutPage;
