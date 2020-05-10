@@ -15,6 +15,18 @@ import promiseMiddleware from './middlewares/promiseMiddleware';
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+export const isServer = !(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);
+
 interface ConfiguredStore {
   history: History;
   persistor: Persistor;
@@ -38,10 +50,14 @@ export default (initialState = {}): ConfiguredStore => {
     middlewares.push(loggerMiddleware);
   }
 
+  const composeEnhancers = isServer
+    ? compose
+    : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
   const store = createStore(
     rootReducer(history),
     initialState,
-    compose(applyMiddleware(...middlewares)),
+    composeEnhancers(applyMiddleware(...middlewares)),
   );
   const persistor = persistStore(store);
 
