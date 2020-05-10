@@ -4,7 +4,7 @@ import * as R from 'ramda';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 
-import { SIGN_IN, SIGN_OUT } from './AuthActions';
+import { SIGN_IN, SIGN_OUT, SIGN_UP } from './AuthActions';
 
 function* signInFailSaga(action): SagaIterator {
   yield call(notify.error, {
@@ -16,14 +16,20 @@ function* signInFailSaga(action): SagaIterator {
   });
 }
 
-function* logoutSaga(): SagaIterator {
+function* signOutSaga(): SagaIterator {
   yield put(push('/signin'));
+}
+
+function* authorizedSuccessfullySaga(): SagaIterator {
+  yield put(push('/'));
 }
 
 function* authSagas(): SagaIterator {
   yield all([
+    yield takeEvery(`${SIGN_UP}_SUCCESS`, authorizedSuccessfullySaga),
+    yield takeEvery(`${SIGN_IN}_SUCCESS`, authorizedSuccessfullySaga),
     yield takeEvery(`${SIGN_IN}_FAIL`, signInFailSaga),
-    yield takeEvery(SIGN_OUT, logoutSaga),
+    yield takeEvery(SIGN_OUT, signOutSaga),
   ]);
 }
 
