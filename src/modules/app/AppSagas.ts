@@ -1,30 +1,14 @@
-// @flow
-
 import Loadable from 'react-loadable';
 import { REHYDRATE } from 'redux-persist';
 import { SagaIterator } from 'redux-saga';
-import {
-  all,
-  fork,
-  put,
-  putResolve,
-  select,
-  take,
-  takeLatest,
-} from 'redux-saga/effects';
+import { all, fork, put, select, take, takeLatest } from 'redux-saga/effects';
 
 import { SIGN_IN } from '@modules/auth/AuthActions';
 import { getIsAuthenticated } from '@modules/auth/AuthReducer';
-import { fetchMe } from '@modules/user/UserActions';
 
 import { appAuthenticated, appBootstrap, BOOTSTRAP } from './AppActions';
 
 function* appBootstrapSaga(): SagaIterator {
-  const isAuthenticated = yield select(getIsAuthenticated);
-
-  if (isAuthenticated) {
-    yield putResolve(fetchMe());
-  }
   yield put(appBootstrap());
 }
 
