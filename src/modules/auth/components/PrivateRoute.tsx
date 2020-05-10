@@ -19,7 +19,7 @@ const PrivateRoute: React.SFC<PrivateRouteProps> = ({
   const isAuthenticated = useSelector(getIsAuthenticated);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       history.push('/signin');
       return;
     }
