@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 1240px;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 72px);
   margin: 0 auto;
   padding: 15% 15px 0;
   text-align: center;
@@ -42,12 +42,12 @@ const Section = styled.p`
 `;
 
 const StyledLink = styled(Link)`
-  color: ${(props): string => props.theme.colors.darkBlue};
+  color: gray;
   font-size: 16px;
   line-height: 1.5;
 
   &:hover {
-    color: ${(props): string => props.theme.colors.darkBlue};
+    color: black;
   }
 `;
 

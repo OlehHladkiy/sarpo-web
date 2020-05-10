@@ -1,7 +1,11 @@
-import * as R from 'ramda';
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+
+import {
+  getIsFullSize,
+  getCurrentPath,
+} from '@modules/router/utils/router-helpers';
 
 enum SignRoute {
   SignIn = 'signin',
@@ -22,7 +26,12 @@ const Header: React.FunctionComponent = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const path = R.compose(R.last, R.split('/'))(location.pathname);
+  const path = getCurrentPath(location);
+  const isFullSize = getIsFullSize(location);
+
+  if (!isFullSize) {
+    return null;
+  }
 
   return (
     <Wrapper>
