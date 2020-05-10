@@ -64,17 +64,15 @@ export const getEmailNotifications = R.pathOr<string>({}, [
   'emailNotifications',
 ]);
 
-export const getProfile = R.path<Record<string, any>>([STATE_KEY, 'profile']);
-
 export const getRole = R.path<Record<string, any>>([
   STATE_KEY,
   'profile',
   'role',
 ]);
 
-export const getName = R.path<string>([STATE_KEY, 'profile', 'name']);
+export const getName = R.path<string>([STATE_KEY, 'name']);
 
-export const getAvatar = R.path<string>([STATE_KEY, 'profile', 'avatar']);
+export const getAvatar = R.path<string>([STATE_KEY, 'avatar']);
 
 export const getCreatedDate = R.path<any>([STATE_KEY, 'createdAt']);
 
