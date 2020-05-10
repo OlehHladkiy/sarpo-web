@@ -20,10 +20,10 @@ const SIGN_IN_MUTATION = gql`
   ${USER_FRAGMENT}
 `;
 
-export const login: any = payload => ({
+export const signIn: any = payload => ({
   type: SIGN_IN,
   payload: {
-    key: 'login',
+    key: 'signIn',
     graphql: {
       mutation: SIGN_IN_MUTATION,
       variables: { payload },
@@ -43,7 +43,7 @@ const SIGNUP_MUTATION = gql`
   ${USER_FRAGMENT}
 `;
 
-export const signup: any = payload => ({
+export const signUp: any = payload => ({
   type: SIGN_UP,
   payload: {
     key: 'signUp',
@@ -52,4 +52,8 @@ export const signup: any = payload => ({
       variables: { payload },
     },
   },
+});
+
+export const signOut: any = () => ({
+  type: SIGN_OUT,
 });
