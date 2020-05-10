@@ -1,16 +1,17 @@
-import { Form } from 'antd';
+import { Form, message as notify } from 'antd';
 import { Store } from 'antd/lib/form/interface';
-import { UserOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 
-import SignUpForm from '../forms/SignUpForm';
 import { testPasswordStrength } from '../utils/auth-helpers';
-import OnboardingWarning from '../components/OnboardingWarning';
+import { signUp } from '../AuthActions';
+import SignUpPageView from '../components/SignUpPageView';
 
 const SignUpPage: React.FunctionComponent = () => {
   const [form] = Form.useForm();
   const [passwordToMeasure, setPasswordToMeasure] = useState('');
+
+  const dispatch = useDispatch();
 
   const validatePassword = (
     _: undefined,
@@ -23,61 +24,23 @@ const SignUpPage: React.FunctionComponent = () => {
     return Promise.resolve();
   };
 
-  const onFinish = (values: Store): void => {
-    console.log(values);
+  const onFinish = async (values: Store): Promise<void> => {
+    notify.loading('Registration in progress...');
+
+    await dispatch(signUp(values));
+
+    notify.success('Welcome');
   };
 
   return (
-    <Wrapper>
-      <IconWrapper>
-        <UserOutlined />
-      </IconWrapper>
-      <Title>Welcome</Title>
-      <Description>Create an account</Description>
-      <FormWrapper>
-        <SignUpForm
-          form={form}
-          passwordToMeasure={passwordToMeasure}
-          setPasswordToMeasure={setPasswordToMeasure}
-          validatePassword={validatePassword}
-          onFinish={onFinish}
-        />
-      </FormWrapper>
-      <OnboardingWarning />
-    </Wrapper>
+    <SignUpPageView
+      form={form}
+      onFinish={onFinish}
+      passwordToMeasure={passwordToMeasure}
+      setPasswordToMeasure={setPasswordToMeasure}
+      validatePassword={validatePassword}
+    />
   );
 };
-
-const Wrapper = styled.div`
-  padding-top: 7%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-
-  input {
-    height: 45px;
-  }
-`;
-
-const Title = styled.div`
-  font-size: 1.5rem;
-  margin-bottom: 40px;
-`;
-
-const Description = styled.div`
-  margin-bottom: 32px;
-  color: #6f7287;
-`;
-
-const IconWrapper = styled.div`
-  font-size: 3rem;
-  color: #1890ff !important;
-`;
-
-const FormWrapper = styled.div`
-  width: 27%;
-`;
 
 export default SignUpPage;
