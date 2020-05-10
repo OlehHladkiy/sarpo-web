@@ -30,6 +30,22 @@ const SignOutPage = Loadable({
   loading: () => <Preloader />,
 });
 
+const DashboardPage = Loadable({
+  loader: () =>
+    import(
+      '@modules/dashboard/pages/DashboardPage' /* webpackChunkName: "DashboardPage" */
+    ),
+  loading: () => <Preloader />,
+});
+
+const ConferencesPage = Loadable({
+  loader: () =>
+    import(
+      '@modules/conference/pages/ConferencesPage' /* webpackChunkName: "ConferencesPage" */
+    ),
+  loading: () => <Preloader />,
+});
+
 const NotFoundPage = Loadable({
   loader: () =>
     import('@components/NotFound' /* webpackChunkName: "NotFoundPage" */),
@@ -47,6 +63,9 @@ export default (
       <Route exact path="/signin" component={SignInPage} />
       <Route exact path="/signup" component={SignUpPage} />
       <Route exact path="/signout" component={SignOutPage} />
+
+      <PrivateRoute exact path="/dashboard" component={DashboardPage} />
+      <PrivateRoute exact path="/conferences" component={ConferencesPage} />
 
       {/* Catch all routes */}
       <Route component={NotFoundPage} />
