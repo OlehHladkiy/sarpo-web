@@ -46,6 +46,14 @@ const ConferencesPage = Loadable({
   loading: () => <Preloader />,
 });
 
+const CreateConferencePage = Loadable({
+  loader: () =>
+    import(
+      '@modules/conference/pages/CreateConferencePage' /* webpackChunkName: "CreateConferencePage" */
+    ),
+  loading: () => <Preloader />,
+});
+
 const NotFoundPage = Loadable({
   loader: () =>
     import('@components/NotFound' /* webpackChunkName: "NotFoundPage" */),
@@ -66,6 +74,11 @@ export default (
 
       <PrivateRoute exact path="/dashboard" component={DashboardPage} />
       <PrivateRoute exact path="/conferences" component={ConferencesPage} />
+      <PrivateRoute
+        exact
+        path="/conferences/create"
+        component={CreateConferencePage}
+      />
 
       {/* Catch all routes */}
       <Route component={NotFoundPage} />
