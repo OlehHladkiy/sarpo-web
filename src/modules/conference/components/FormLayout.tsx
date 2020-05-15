@@ -28,6 +28,10 @@ const Wrapper = styled.div`
   padding-left: 35px;
   padding-bottom: 32px;
   border-bottom: 1px solid rgb(238, 237, 242);
+
+  .ant-picker-range {
+    width: 40%;
+  }
 `;
 
 const IconWrapper = styled.div`
