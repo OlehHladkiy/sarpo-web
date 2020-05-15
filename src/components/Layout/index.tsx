@@ -1,10 +1,21 @@
 import { Layout as LayoutWrapper, Menu } from 'antd';
-import React from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import LayoutHeader from '@components/LayoutHeader';
 import { getCurrentPath } from '@modules/router/utils/router-helpers';
+import { VenueConferenceOnboardingStep } from '@modules/conference/models/conference';
+import {
+  getConferenceTitle,
+  getConferenceStartDate,
+  getConferenceStartTime,
+  getConferenceOnboardedSteps,
+} from '@modules/conference/ConferenceReducer';
+import { getConferenceDate } from '@modules/conference/utils/conference-helpers';
+import { fetchConference } from '@modules/conference/ConferenceActions';
 
 const { Content, Sider } = LayoutWrapper;
 
@@ -15,25 +26,76 @@ interface LayoutProps {
 const Layout: React.FunctionComponent<LayoutProps> = ({
   children,
 }: LayoutProps) => {
+  const { conferenceId } = useParams();
   const history = useHistory();
   const location = useLocation();
 
+  const conferenceTitle = useSelector((state: Record<string, any>) =>
+    getConferenceTitle(state, conferenceId),
+  );
+  const conferenceStartDate = useSelector((state: Record<string, any>) =>
+    getConferenceStartDate(state, conferenceId),
+  );
+  const conferenceStartTime = useSelector((state: Record<string, any>) =>
+    getConferenceStartTime(state, conferenceId),
+  );
+  const conferenceOnboardedSteps = useSelector((state: Record<string, any>) =>
+    getConferenceOnboardedSteps(state, conferenceId),
+  );
+
   const path = getCurrentPath(location);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const filters = { _id: conferenceId };
+    dispatch(fetchConference({ filters }));
+  }, []);
+
+  const getIsChecked = (key: string): boolean =>
+    conferenceOnboardedSteps.includes(key);
 
   return (
     <StyledLayout>
       <LayoutHeader />
       <StyledContent>
         <LayoutWrapper>
-          <StyledSider>
+          <StyledSider width={250}>
+            <ConferenceShortInfo>
+              <ConferenceTitle>{conferenceTitle}</ConferenceTitle>
+              <div>
+                {getConferenceDate(conferenceStartDate, conferenceStartTime)}
+              </div>
+            </ConferenceShortInfo>
             <Menu
               mode="inline"
               defaultSelectedKeys={[path]}
-              onClick={({ key }: any): void => history.push(`/${key}`)}
+              onClick={({ key }: any): void =>
+                history.push(`/conference/${conferenceId}/${key}`)
+              }
             >
-              <Menu.Item key="basic">Basic Info</Menu.Item>
-              <Menu.Item key="details">Details</Menu.Item>
-              <Menu.Item key="tickets">Tickets</Menu.Item>
+              <Menu.Item key={VenueConferenceOnboardingStep.Basic}>
+                {getIsChecked(VenueConferenceOnboardingStep.Basic) && (
+                  <CheckCircleTwoTone />
+                )}
+                Basic Info
+              </Menu.Item>
+              <Menu.Item key={VenueConferenceOnboardingStep.Details}>
+                {getIsChecked(VenueConferenceOnboardingStep.Details) ? (
+                  <CheckCircleTwoTone />
+                ) : (
+                  <CloseCircleTwoTone />
+                )}
+                Details
+              </Menu.Item>
+              <Menu.Item key={VenueConferenceOnboardingStep.Tickets}>
+                {getIsChecked(VenueConferenceOnboardingStep.Tickets) ? (
+                  <CheckCircleTwoTone />
+                ) : (
+                  <CloseCircleTwoTone />
+                )}
+                Tickets
+              </Menu.Item>
               <Menu.Item key="dashboard">Dashboard</Menu.Item>
             </Menu>
           </StyledSider>
@@ -44,16 +106,35 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
   );
 };
 
-const StyledSider = styled(Sider)`
-  background-color: #fff;
-`;
-
 const StyledLayout = styled(LayoutWrapper)`
   height: 100%;
 
   .ant-menu-item {
     margin: 0;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
   }
+
+  .anticon {
+    font-size: 18px;
+  }
+`;
+
+const StyledSider = styled(Sider)`
+  background-color: #fff;
+`;
+
+const ConferenceShortInfo = styled.div`
+  margin-bottom: 25px;
+  padding-top: 15px;
+  padding-left: 24px;
+  color: #39364f;
+`;
+
+const ConferenceTitle = styled.div`
+  margin-bottom: 8px;
+  font-size: 1.5rem;
 `;
 
 const StyledContent = styled(Content)`
