@@ -87,7 +87,6 @@ module.exports = {
     'ramda/when-simplification': 'error',
     // React hooks
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'off',
   },
   settings: {
     react: {
