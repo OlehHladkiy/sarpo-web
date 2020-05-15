@@ -54,6 +54,14 @@ const CreateConferencePage = Loadable({
   loading: () => <Preloader />,
 });
 
+const OnboardingConferencePage = Loadable({
+  loader: () =>
+    import(
+      '@modules/conference/pages/OnboardingConferencePage' /* webpackChunkName: "OnboardingConferencePage" */
+    ),
+  loading: () => <Preloader />,
+});
+
 const NotFoundPage = Loadable({
   loader: () =>
     import('@components/NotFound' /* webpackChunkName: "NotFoundPage" */),
@@ -66,18 +74,27 @@ export default (
       <PrivateRoute
         exact
         path="/"
-        component={(): React.ReactNode => <Redirect to="/dashboard" />}
+        component={(): React.ReactNode => <Redirect to="/conferences" />}
       />
       <Route exact path="/signin" component={SignInPage} />
       <Route exact path="/signup" component={SignUpPage} />
       <Route exact path="/signout" component={SignOutPage} />
 
-      <PrivateRoute exact path="/dashboard" component={DashboardPage} />
+      <PrivateRoute
+        exact
+        path="/conference/:conferenceId/dashboard"
+        component={DashboardPage}
+      />
       <PrivateRoute exact path="/conferences" component={ConferencesPage} />
       <PrivateRoute
         exact
         path="/conferences/create"
         component={CreateConferencePage}
+      />
+      <PrivateRoute
+        exact
+        path="/conference/:conferenceId/:onboardingStep(basic|details|tickets)"
+        component={OnboardingConferencePage}
       />
 
       {/* Catch all routes */}
