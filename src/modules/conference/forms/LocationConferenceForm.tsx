@@ -25,7 +25,7 @@ const LocationConferenceForm: React.FunctionComponent = () => {
       description="Help people in the area discover your event and let attendees know where to show up."
       icon={<EnvironmentOutlined />}
     >
-      <Form.Item name="type" shouldUpdate={true}>
+      <Form.Item name="type">
         <Radio.Group onChange={(e): void => setType(e.target.value)}>
           <Radio.Button value={ConferenceType.Venue}>Venue</Radio.Button>
           <Radio.Button value={ConferenceType.Online}>
@@ -33,7 +33,12 @@ const LocationConferenceForm: React.FunctionComponent = () => {
           </Radio.Button>
         </Radio.Group>
       </Form.Item>
-      <Form.Item>{getComponentByType()}</Form.Item>
+      <Form.Item
+        name="address"
+        rules={[{ required: true, message: 'Please enter address' }]}
+      >
+        {getComponentByType()}
+      </Form.Item>
     </FormLayout>
   );
 };
