@@ -10,47 +10,29 @@ import { ConferenceType, ConferenceDateType } from '../models/conference';
 
 interface CreateOrEditConferenceFormProps {
   form: FormInstance;
-  onFinish: (values: Record<string, any>) => void;
+  onFinish: (values: Record<string, any>) => Promise<void>;
 }
 
 const CreateOrEditConferenceForm: React.FunctionComponent<CreateOrEditConferenceFormProps> = ({
   form,
   onFinish,
 }: CreateOrEditConferenceFormProps) => (
-  <Wrapper>
-    <Form
-      initialValues={{
-        type: ConferenceType.Venue,
-        dateType: ConferenceDateType.Single,
-      }}
-      form={form}
-      onFinish={onFinish}
-    >
-      <BasicInfoConferenceForm />
-      <LocationConferenceForm />
-      <DateConferenceForm />
-      <SubmitButton htmlType="submit" type="primary">
-        Create
-      </SubmitButton>
-    </Form>
-  </Wrapper>
+  <Form
+    initialValues={{
+      type: ConferenceType.Venue,
+      dateType: ConferenceDateType.Single,
+    }}
+    form={form}
+    onFinish={onFinish}
+  >
+    <BasicInfoConferenceForm />
+    <LocationConferenceForm />
+    <DateConferenceForm />
+    <SubmitButton htmlType="submit" type="primary">
+      Create
+    </SubmitButton>
+  </Form>
 );
-
-const Wrapper = styled.div`
-  margin: 0 25%;
-
-  input {
-    height: 45px;
-  }
-
-  @media (max-width: 768px) {
-    margin: 0 40%;
-  }
-
-  @media (max-width: 1024px) {
-    margin: 0 15%;
-  }
-`;
 
 const SubmitButton = styled(Button)`
   margin-top: 40px;
