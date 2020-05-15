@@ -14,6 +14,9 @@ import RouterReducer, {
 import UserReducer, {
   STATE_KEY as USER_STATE_KEY,
 } from '@modules/user/UserReducer';
+import ConferenceReducer, {
+  STATE_KEY as CONFERENCE_STATE_KEY,
+} from '@modules/conference/ConferenceReducer';
 
 const persist = R.curry(persistReducer)(ReduxPersist.storeConfig);
 
@@ -24,4 +27,5 @@ export default (history: any): Reducer<any, any> =>
     R.assoc(AUTH_STATE_KEY, AuthReducer),
     R.assoc(ROUTER_STATE_KEY, RouterReducer(history)),
     R.assoc(USER_STATE_KEY, UserReducer),
+    R.assoc(CONFERENCE_STATE_KEY, ConferenceReducer),
   )({});
