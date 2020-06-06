@@ -45,3 +45,8 @@ export const getConferenceDate = (
   startDate: string | Date,
   startTime: string,
 ): string => `${moment(startDate).format('dddd, MMMM D YYYY')} at ${startTime}`;
+
+export const appendNewStep = (
+  step: string,
+  onboardedSteps: string[],
+): string[] => R.uniq(R.append(step, onboardedSteps));

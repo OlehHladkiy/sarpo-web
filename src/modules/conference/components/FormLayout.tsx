@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface FormLayoutProps {
-  title: string;
-  description: string;
-  children: React.ReactNode;
-  icon: React.ReactNode;
+  title?: string;
+  description?: string;
+  children?: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
 const FormLayout: React.FunctionComponent<FormLayoutProps> = ({

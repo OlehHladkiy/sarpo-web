@@ -36,17 +36,15 @@ interface ConferencesTableProps {
 
 const ConferencesTable: React.FunctionComponent<ConferencesTableProps> = ({
   conferences,
-}: ConferencesTableProps) => {
-  return (
-    <Wrapper>
-      <Table
-        columns={columns}
-        dataSource={conferences}
-        rowKey={(conference: Record<string, any>): string => conference._id}
-      />
-    </Wrapper>
-  );
-};
+}: ConferencesTableProps) => (
+  <Wrapper>
+    <Table
+      columns={columns}
+      dataSource={conferences}
+      rowKey={(conference: Record<string, any>): string => conference._id}
+    />
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
   margin-top: 25px;

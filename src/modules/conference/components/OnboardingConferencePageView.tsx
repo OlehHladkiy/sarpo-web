@@ -4,23 +4,38 @@ import styled from 'styled-components';
 
 import Layout from '@components/Layout';
 
-import CreateOrEditConferenceForm from '../forms/CreateOrEditConferenceForm';
+import ConferenceCreateOrEditForm from '../forms/ConferenceCreateOrEditForm';
+import ConferenceDetailForm from '../forms/ConferenceDetailForm';
+import { ConferenceOnboardingStep } from '../models/conference';
+import ConferenceTicketsContainer from '../containers/ConferenceTicketsContainer';
 
 interface OnboardingConferencePageProps {
   onboardingStep: string;
+  tickets: Record<string, any>[];
   form: FormInstance;
   onFinish: (values: Record<string, any>) => Promise<void>;
 }
 
 const OnboardingConferencePage: React.FunctionComponent<OnboardingConferencePageProps> = ({
   onboardingStep,
+  tickets,
   form,
   onFinish,
 }: OnboardingConferencePageProps) => (
   <Layout>
     <FormWrapper>
-      {onboardingStep === 'basic' && (
-        <CreateOrEditConferenceForm form={form} onFinish={onFinish} />
+      {onboardingStep === ConferenceOnboardingStep.Basic && (
+        <ConferenceCreateOrEditForm
+          form={form}
+          onFinish={onFinish}
+          submitButtonName="Update"
+        />
+      )}
+      {onboardingStep === ConferenceOnboardingStep.Details && (
+        <ConferenceDetailForm form={form} onFinish={onFinish} />
+      )}
+      {onboardingStep === ConferenceOnboardingStep.Tickets && (
+        <ConferenceTicketsContainer initialTickets={tickets} />
       )}
     </FormWrapper>
   </Layout>

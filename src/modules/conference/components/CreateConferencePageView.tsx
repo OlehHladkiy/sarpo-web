@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import LayoutHeader from '@components/LayoutHeader';
 
-import CreateOrEditConferenceForm from '../forms/CreateOrEditConferenceForm';
+import CreateOrEditConferenceForm from '../forms/ConferenceCreateOrEditForm';
 
 interface CreateConferencePageViewProps {
   form: FormInstance;

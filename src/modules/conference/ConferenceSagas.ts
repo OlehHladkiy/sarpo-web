@@ -5,13 +5,20 @@ import { all, call, put, takeEvery } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 
 import { CREATE_CONFERENCE } from './ConferenceActions';
+import { ConferenceOnboardingStep } from './models/conference';
 
 import { getGraphqlPayload } from '@store/helpers';
 
 function* createdConferenceSaga(action: any): SagaIterator {
   const createdConference = getGraphqlPayload(action);
 
-  yield put(push(`/conference/${R.prop('_id', createdConference)}/dashboard`));
+  yield put(
+    push(
+      `/conference/${R.prop('_id', createdConference)}/${
+        ConferenceOnboardingStep.Details
+      }`,
+    ),
+  );
   yield call(
     notify.success,
     `${R.prop(

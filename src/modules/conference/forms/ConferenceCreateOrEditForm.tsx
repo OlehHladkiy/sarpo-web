@@ -3,20 +3,22 @@ import { FormInstance } from 'antd/lib/form';
 import React from 'react';
 import styled from 'styled-components';
 
-import BasicInfoConferenceForm from './BasicInfoConferenceForm';
-import LocationConferenceForm from './LocationConferenceForm';
-import DateConferenceForm from './DateConferenceForm';
+import ConferenceBasicInfoForm from './ConferenceBasicInfoForm';
+import ConferenceLocationForm from './ConferenceLocationForm';
+import ConferenceDateForm from './ConferenceDateForm';
 import { ConferenceType, ConferenceDateType } from '../models/conference';
 
-interface CreateOrEditConferenceFormProps {
+interface ConferenceCreateOrEditFormProps {
+  submitButtonName?: string;
   form: FormInstance;
   onFinish: (values: Record<string, any>) => Promise<void>;
 }
 
-const CreateOrEditConferenceForm: React.FunctionComponent<CreateOrEditConferenceFormProps> = ({
+const ConferenceCreateOrEditForm: React.FunctionComponent<ConferenceCreateOrEditFormProps> = ({
+  submitButtonName = 'Create',
   form,
   onFinish,
-}: CreateOrEditConferenceFormProps) => (
+}: ConferenceCreateOrEditFormProps) => (
   <Form
     initialValues={{
       type: ConferenceType.Venue,
@@ -25,11 +27,11 @@ const CreateOrEditConferenceForm: React.FunctionComponent<CreateOrEditConference
     form={form}
     onFinish={onFinish}
   >
-    <BasicInfoConferenceForm />
-    <LocationConferenceForm />
-    <DateConferenceForm />
+    <ConferenceBasicInfoForm />
+    <ConferenceLocationForm />
+    <ConferenceDateForm />
     <SubmitButton htmlType="submit" type="primary">
-      Create
+      {submitButtonName}
     </SubmitButton>
   </Form>
 );
@@ -41,4 +43,4 @@ const SubmitButton = styled(Button)`
   width: 200px;
 `;
 
-export default CreateOrEditConferenceForm;
+export default ConferenceCreateOrEditForm;

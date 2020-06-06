@@ -5,7 +5,7 @@ import { EnvironmentOutlined } from '@ant-design/icons';
 import FormLayout from '../components/FormLayout';
 import { ConferenceType } from '../models/conference';
 
-const LocationConferenceForm: React.FunctionComponent = () => {
+const ConferenceLocationForm: React.FunctionComponent = () => {
   const [type, setType] = useState(ConferenceType.Venue);
 
   const getComponentByType = (): React.ReactNode => {
@@ -43,4 +43,4 @@ const LocationConferenceForm: React.FunctionComponent = () => {
   );
 };
 
-export default LocationConferenceForm;
+export default ConferenceLocationForm;

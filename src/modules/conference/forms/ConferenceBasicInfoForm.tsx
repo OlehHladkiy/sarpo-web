@@ -4,7 +4,7 @@ import React from 'react';
 
 import FormLayout from '../components/FormLayout';
 
-const BasicInfoConferenceForm: React.FunctionComponent = () => (
+const ConferenceBasicInfoForm: React.FunctionComponent = () => (
   <FormLayout
     title="Basic Info"
     description="Name your event and tell event-goers why they should come. Add details that highlight what makes it unique."
@@ -25,4 +25,4 @@ const BasicInfoConferenceForm: React.FunctionComponent = () => (
   </FormLayout>
 );
 
-export default BasicInfoConferenceForm;
+export default ConferenceBasicInfoForm;

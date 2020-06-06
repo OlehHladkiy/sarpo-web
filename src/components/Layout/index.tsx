@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import LayoutHeader from '@components/LayoutHeader';
 import { getCurrentPath } from '@modules/router/utils/router-helpers';
-import { VenueConferenceOnboardingStep } from '@modules/conference/models/conference';
+import { ConferenceOnboardingStep } from '@modules/conference/models/conference';
 import {
   getConferenceTitle,
   getConferenceStartDate,
@@ -74,22 +74,22 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
                 history.push(`/conference/${conferenceId}/${key}`)
               }
             >
-              <Menu.Item key={VenueConferenceOnboardingStep.Basic}>
-                {getIsChecked(VenueConferenceOnboardingStep.Basic) && (
+              <Menu.Item key={ConferenceOnboardingStep.Basic}>
+                {getIsChecked(ConferenceOnboardingStep.Basic) && (
                   <CheckCircleTwoTone />
                 )}
                 Basic Info
               </Menu.Item>
-              <Menu.Item key={VenueConferenceOnboardingStep.Details}>
-                {getIsChecked(VenueConferenceOnboardingStep.Details) ? (
+              <Menu.Item key={ConferenceOnboardingStep.Details}>
+                {getIsChecked(ConferenceOnboardingStep.Details) ? (
                   <CheckCircleTwoTone />
                 ) : (
                   <CloseCircleTwoTone />
                 )}
                 Details
               </Menu.Item>
-              <Menu.Item key={VenueConferenceOnboardingStep.Tickets}>
-                {getIsChecked(VenueConferenceOnboardingStep.Tickets) ? (
+              <Menu.Item key={ConferenceOnboardingStep.Tickets}>
+                {getIsChecked(ConferenceOnboardingStep.Tickets) ? (
                   <CheckCircleTwoTone />
                 ) : (
                   <CloseCircleTwoTone />
@@ -119,16 +119,20 @@ const StyledLayout = styled(LayoutWrapper)`
   .anticon {
     font-size: 18px;
   }
+
+  ul {
+    border: none;
+  }
 `;
 
 const StyledSider = styled(Sider)`
   background-color: #fff;
+  border-right: 1px solid #f0f0f0;
 `;
 
 const ConferenceShortInfo = styled.div`
   margin-bottom: 25px;
-  padding-top: 15px;
-  padding-left: 24px;
+  padding: 15px 10px 0 24px;
   color: #39364f;
 `;
 

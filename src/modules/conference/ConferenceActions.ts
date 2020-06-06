@@ -4,13 +4,32 @@ export const namespace = 'CONFERENCE';
 export const FETCH_CONFERENCES = `${namespace}/FETCH_CONFERENCES`;
 export const FETCH_CONFERENCE = `${namespace}/FETCH_CONFERENCE`;
 export const CREATE_CONFERENCE = `${namespace}/CREATE_CONFERENCE`;
+export const UPDATE_CONFERENCE = `${namespace}/UPDATE_CONFERENCE`;
 
 export const CONFERENCE_FRAGMENT = gql`
   fragment conference on Conference {
     _id
-    image
+    image {
+      id
+      url
+    }
+    tickets {
+      _id
+      title
+      quantity
+      type
+      minQuantity
+      maxQuantity
+      price
+      participants
+    }
     description
     summary
+    files {
+      id
+      url
+      friendlyName
+    }
     title
     organizer
     address
@@ -89,6 +108,28 @@ export const createConference: any = payload => ({
     key: 'createConference',
     graphql: {
       mutation: CREATE_CONFERENCE_MUTATION,
+      variables: {
+        payload,
+      },
+    },
+  },
+});
+
+const UPDATE_CONFERENCE_MUTATION = gql`
+  mutation updateConference($payload: UpdateConferenceInput!) {
+    updateConference(data: $payload) {
+      ...conference
+    }
+  }
+  ${CONFERENCE_FRAGMENT}
+`;
+
+export const updateConference: any = payload => ({
+  type: UPDATE_CONFERENCE,
+  payload: {
+    key: 'updateConference',
+    graphql: {
+      mutation: UPDATE_CONFERENCE_MUTATION,
       variables: {
         payload,
       },

@@ -8,8 +8,13 @@ export enum ConferenceDateType {
   Multiple = 'multiple',
 }
 
-export enum VenueConferenceOnboardingStep {
+export enum ConferenceOnboardingStep {
   Basic = 'basic',
   Details = 'details',
   Tickets = 'tickets',
+}
+
+export enum TicketType {
+  Free = 'free',
+  Paid = 'paid',
 }

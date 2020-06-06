@@ -5,6 +5,7 @@ import { getGraphqlPayload } from '@store/helpers';
 
 import {
   CREATE_CONFERENCE,
+  UPDATE_CONFERENCE,
   FETCH_CONFERENCES,
   FETCH_CONFERENCE,
 } from './ConferenceActions';
@@ -33,6 +34,7 @@ const ConferenceReducer = (
 
       return R.assoc('data', conferences, state);
     }
+    case `${UPDATE_CONFERENCE}_SUCCESS`:
     case `${FETCH_CONFERENCE}_SUCCESS`:
     case `${CREATE_CONFERENCE}_SUCCESS`: {
       const conference = R.defaultTo({}, getGraphqlPayload(action));
@@ -81,5 +83,10 @@ export const getConferenceOnboardedSteps = (
   conferenceId: string,
 ): string[] =>
   R.propOr([], 'onboardedSteps', getConferenceById(state, conferenceId));
+
+export const getConferenceTickets = (
+  state: Record<string, any>,
+  conferenceId: string,
+): string[] => R.propOr([], 'tickets', getConferenceById(state, conferenceId));
 
 export default ConferenceReducer;
