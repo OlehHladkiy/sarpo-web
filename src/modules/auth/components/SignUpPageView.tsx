@@ -1,6 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
-import React from 'react';
 import { FormInstance } from 'antd/lib/form';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import SignUpForm from '../forms/SignUpForm';
@@ -20,25 +21,29 @@ const SignUpPageView: React.FunctionComponent<SignUpPageViewProps> = ({
   onFinish,
   validatePassword,
   setPasswordToMeasure,
-}: SignUpPageViewProps) => (
-  <Wrapper>
-    <IconWrapper>
-      <UserOutlined />
-    </IconWrapper>
-    <Title>Welcome</Title>
-    <Description>Create an account</Description>
-    <FormWrapper>
-      <SignUpForm
-        form={form}
-        passwordToMeasure={passwordToMeasure}
-        setPasswordToMeasure={setPasswordToMeasure}
-        validatePassword={validatePassword}
-        onFinish={onFinish}
-      />
-    </FormWrapper>
-    <OnboardingWarning />
-  </Wrapper>
-);
+}: SignUpPageViewProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Wrapper>
+      <IconWrapper>
+        <UserOutlined />
+      </IconWrapper>
+      <Title>{t('welcome')}</Title>
+      <Description>{t('Create an account')}</Description>
+      <FormWrapper>
+        <SignUpForm
+          form={form}
+          passwordToMeasure={passwordToMeasure}
+          setPasswordToMeasure={setPasswordToMeasure}
+          validatePassword={validatePassword}
+          onFinish={onFinish}
+        />
+      </FormWrapper>
+      <OnboardingWarning />
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   padding-top: 7%;

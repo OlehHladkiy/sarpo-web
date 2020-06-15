@@ -6,6 +6,7 @@ import { useLocation, useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import LayoutHeader from '@components/LayoutHeader';
+import Footer from '@components/Footer';
 import { getCurrentPath } from '@modules/router/utils/router-helpers';
 import { ConferenceOnboardingStep } from '@modules/conference/models/conference';
 import {
@@ -75,9 +76,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
               }
             >
               <Menu.Item key={ConferenceOnboardingStep.Basic}>
-                {getIsChecked(ConferenceOnboardingStep.Basic) && (
-                  <CheckCircleTwoTone />
-                )}
+                <CheckCircleTwoTone />
                 Basic Info
               </Menu.Item>
               <Menu.Item key={ConferenceOnboardingStep.Details}>
@@ -96,11 +95,11 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
                 )}
                 Tickets
               </Menu.Item>
-              <Menu.Item key="dashboard">Dashboard</Menu.Item>
             </Menu>
           </StyledSider>
           <StyledContent>{children}</StyledContent>
         </LayoutWrapper>
+        <Footer />
       </StyledContent>
     </StyledLayout>
   );

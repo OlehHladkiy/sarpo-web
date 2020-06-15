@@ -2,14 +2,15 @@ import { Layout, Menu, Dropdown, Avatar } from 'antd';
 import {
   UserOutlined,
   DownOutlined,
-  SettingOutlined,
+  // SettingOutlined,
   BookOutlined,
   LogoutOutlined,
-  ContainerOutlined,
+  // ContainerOutlined,
 } from '@ant-design/icons';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { getEmail, getName } from '@modules/user/UserReducer';
@@ -27,6 +28,7 @@ const { Header } = Layout;
 const LayoutHeader: React.FunctionComponent = () => {
   const history = useHistory();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const email = useSelector(getEmail);
   const name = useSelector(getName);
@@ -41,14 +43,14 @@ const LayoutHeader: React.FunctionComponent = () => {
           key={NavKey.Conferences}
           onClick={(): void => history.push(`/${NavKey.Conferences}`)}
         >
-          Conferences
+          {t('Conferences')}
         </Menu.Item>
       </Menu>
       <RightControls>
         <RightControlsMenu>
           <Menu theme="dark" mode="horizontal">
-            <Menu.Item>Preview</Menu.Item>
-            <Menu.Item>Publish Conference</Menu.Item>
+            <Menu.Item>{t('Preview')}</Menu.Item>
+            <Menu.Item>{t('Publish Conference')}</Menu.Item>
           </Menu>
         </RightControlsMenu>
         <Dropdown
@@ -68,9 +70,9 @@ const LayoutHeader: React.FunctionComponent = () => {
                 onClick={({ key }: any): void => history.push(`/${key}`)}
               >
                 <UserMenuItem icon={<BookOutlined />} key={NavKey.Conferences}>
-                  Conferences
+                  {t('Conferences')}
                 </UserMenuItem>
-                <BorderedBottomItem
+                {/* <BorderedBottomItem
                   icon={<SettingOutlined />}
                   key={NavKey.Settings}
                 >
@@ -78,7 +80,7 @@ const LayoutHeader: React.FunctionComponent = () => {
                 </BorderedBottomItem>
                 <UserMenuItem icon={<ContainerOutlined />} key={NavKey.Tickets}>
                   Tickets
-                </UserMenuItem>
+                </UserMenuItem> */}
                 <BorderedTopItem icon={<LogoutOutlined />} key={NavKey.Signout}>
                   Sign out
                 </BorderedTopItem>
@@ -128,9 +130,9 @@ const UserMenuItem = styled(Menu.Item)`
   margin: 0 !important;
 `;
 
-const BorderedBottomItem = styled(UserMenuItem)`
-  border-bottom: 1px solid #eeedf2;
-`;
+// const BorderedBottomItem = styled(UserMenuItem)`
+//   border-bottom: 1px solid #eeedf2;
+// `;
 
 const BorderedTopItem = styled(UserMenuItem)`
   border-top: 1px solid #eeedf2;

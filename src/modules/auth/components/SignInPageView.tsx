@@ -1,5 +1,6 @@
-import React from 'react';
 import { FormInstance } from 'antd/lib/form';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import SignInForm from '../forms/SignInForm';
@@ -13,19 +14,23 @@ interface SignInPageViewProps {
 const SignInPageView: React.FunctionComponent<SignInPageViewProps> = ({
   form,
   onFinish,
-}: SignInPageViewProps) => (
-  <Wrapper>
-    <LogoWrapper>
-      <Logo />
-    </LogoWrapper>
-    <Title>Sign in</Title>
-    <Tip>Use email to get started</Tip>
-    <FormWrapper>
-      <SignInForm form={form} onFinish={onFinish} />
-    </FormWrapper>
-    <OnboardingWarning />
-  </Wrapper>
-);
+}: SignInPageViewProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Wrapper>
+      <LogoWrapper>
+        <Logo />
+      </LogoWrapper>
+      <Title>{t('signup')}</Title>
+      <Tip>{t('Use email to get started')}</Tip>
+      <FormWrapper>
+        <SignInForm form={form} onFinish={onFinish} />
+      </FormWrapper>
+      <OnboardingWarning />
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   height: 100%;

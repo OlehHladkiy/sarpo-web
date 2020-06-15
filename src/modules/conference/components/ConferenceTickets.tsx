@@ -7,7 +7,7 @@ import ConferenceTicketsTable from './ConferenceTicketsTable';
 interface ConferenceTicketsProps {
   tickets: Record<string, any>[];
   onCreateTicket: () => void;
-  onEditTicket: () => void;
+  onEditTicket: (ticket: any) => void;
 }
 
 const ConferenceTickets: React.FunctionComponent<ConferenceTicketsProps> = ({

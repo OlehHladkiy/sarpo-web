@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import LayoutHeader from '@components/LayoutHeader';
+import Footer from '@components/Footer';
 
 import CreateOrEditConferenceForm from '../forms/ConferenceCreateOrEditForm';
 
@@ -20,15 +21,17 @@ const CreateConferencePageView: React.FunctionComponent<CreateConferencePageView
     <FormWrapper>
       <CreateOrEditConferenceForm form={form} onFinish={onFinish} />
     </FormWrapper>
+    <Footer />
   </Wrapper>
 );
 
 const Wrapper = styled.div`
   margin-bottom: 40px;
+  height: 100vh;
 `;
 
 const FormWrapper = styled.div`
-  margin: 0 25%;
+  margin: 0 25% 30px 25%;
 
   input {
     height: 45px;

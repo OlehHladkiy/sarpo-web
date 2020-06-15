@@ -1,7 +1,7 @@
 import { Spin } from 'antd';
 import { InboxOutlined, DeleteOutlined } from '@ant-design/icons';
-
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 interface ImageUploadDraggerProps {
@@ -18,28 +18,32 @@ const ImageUploadDragger: React.FunctionComponent<ImageUploadDraggerProps> = ({
   getRootProps,
   getInputProps,
   onRemove,
-}: ImageUploadDraggerProps) => (
-  <Spin tip="Uploading..." spinning={isUploading}>
-    {Boolean(url) ? (
-      <ImageWrapper>
-        <img src={url} />
-        <RemoveButton className="remove-btn" onClick={(): void => onRemove()} />
-      </ImageWrapper>
-    ) : (
-      <UploadWrapper {...getRootProps()}>
-        <input {...getInputProps()} />
-        <p>
-          <InboxOutlined className="upload-icon" />
-        </p>
-        <h3>Click or drag file to this area to upload</h3>
-        <p className="ant-upload-hint">
-          Support for a single or bulk upload. Strictly prohibit from uploading
-          company data or other band files
-        </p>
-      </UploadWrapper>
-    )}
-  </Spin>
-);
+}: ImageUploadDraggerProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Spin tip={`${t('Uploading')}...`} spinning={isUploading}>
+      {Boolean(url) ? (
+        <ImageWrapper>
+          <img src={url} />
+          <RemoveButton
+            className="remove-btn"
+            onClick={(): void => onRemove()}
+          />
+        </ImageWrapper>
+      ) : (
+        <UploadWrapper {...getRootProps()}>
+          <input {...getInputProps()} />
+          <p>
+            <InboxOutlined className="upload-icon" />
+          </p>
+          <h3>{t('Area Upload')}</h3>
+          <p className="ant-upload-hint">{t('Area')}</p>
+        </UploadWrapper>
+      )}
+    </Spin>
+  );
+};
 
 const ImageWrapper = styled.div`
   border: 1px solid #d9d9d9;

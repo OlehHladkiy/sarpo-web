@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import {
@@ -25,6 +26,7 @@ const SignButtonTitle = {
 const Header: React.FunctionComponent = () => {
   const history = useHistory();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const path = getCurrentPath(location);
   const isFullSize = getIsFullSize(location);
@@ -38,7 +40,7 @@ const Header: React.FunctionComponent = () => {
       <Logo />
       <ControlsWrapper>
         <SignInButton onClick={(): void => history.push(ToSignRouteMap[path])}>
-          {SignButtonTitle[path]}
+          {t(SignButtonTitle[path])}
         </SignInButton>
       </ControlsWrapper>
     </Wrapper>

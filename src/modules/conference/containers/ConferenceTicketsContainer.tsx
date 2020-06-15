@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Form } from 'antd';
+import * as R from 'ramda';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -25,7 +25,8 @@ const ConferenceTicketsContainer: React.FunctionComponent<ConferenceTicketsConta
   const [form] = Form.useForm();
   const [isVisibleCreateMode, setIsVisibleCreateModel] = useState(false);
   const [tickets, setTickets]: any = useState([]);
-  const [isUpdating, setIsUpdating] = useState(false);
+  const [ticketUpdatingId, setTicketUpdatingId] = useState(null);
+  const [loading, setLoading] = useState(false);
   const onboardedSteps = useSelector((state: any) =>
     getConferenceOnboardedSteps(state, conferenceId),
   );
@@ -42,24 +43,49 @@ const ConferenceTicketsContainer: React.FunctionComponent<ConferenceTicketsConta
   }, [initialTickets]);
 
   const onFinish = async (values: Record<string, any>): Promise<void> => {
-    setIsUpdating(true);
+    setLoading(true);
 
-    await dispatch(
-      updateConference({
-        conferenceId,
-        onboardedSteps: appendNewStep(onboardingStep, onboardedSteps),
-        tickets: [...currentTickets, values],
-      }),
+    if (Boolean(ticketUpdatingId)) {
+      dispatch(
+        updateConference({
+          conferenceId,
+          tickets: currentTickets.map((ticket: Record<string, any>) =>
+            ticket._id === ticketUpdatingId
+              ? R.mergeRight(R.omit(['participants'], ticket), values)
+              : ticket,
+          ),
+        }),
+      );
+    } else {
+      await dispatch(
+        updateConference({
+          conferenceId,
+          onboardedSteps: appendNewStep(onboardingStep, onboardedSteps),
+          tickets: [...currentTickets, values],
+        }),
+      );
+    }
+
+    setLoading(false);
+    setIsVisibleCreateModel(false);
+  };
+
+  const onEditTicket = (ticket: any): void => {
+    form.setFieldsValue(
+      R.pick(
+        ['title', 'quantity', 'type', 'minQuantity', 'maxQuantity', 'price'],
+        ticket,
+      ),
     );
 
-    setIsUpdating(false);
-    setIsVisibleCreateModel(false);
+    setTicketUpdatingId(ticket._id);
+    setIsVisibleCreateModel(true);
   };
 
   return (
     <>
       <ConferenceFormModal
-        loading={isUpdating}
+        loading={loading}
         onFinish={onFinish}
         form={form}
         isVisible={isVisibleCreateMode}
@@ -67,7 +93,7 @@ const ConferenceTicketsContainer: React.FunctionComponent<ConferenceTicketsConta
       />
       <ConferenceTickets
         tickets={tickets}
-        onEditTicket={(): void => setIsVisibleCreateModel(true)}
+        onEditTicket={onEditTicket}
         onCreateTicket={(): void => setIsVisibleCreateModel(true)}
       />
     </>

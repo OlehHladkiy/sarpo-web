@@ -1,12 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-const OnboardingWarning: React.FunctionComponent = () => (
-  <Wrapper>
-    By clicking {'"'}Sign In{'"'} or {'"'}Sign Up{'"'}, I accept the Sarpo Terms
-    Of Service, Community Guidelines and have read the Privacy Policy.
-  </Wrapper>
-);
+const OnboardingWarning: React.FunctionComponent = () => {
+  const { t } = useTranslation();
+
+  return <Wrapper>{t('Onboarding Warning')}</Wrapper>;
+};
 
 const Wrapper = styled.span`
   margin-top: 20px;

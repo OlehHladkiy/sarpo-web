@@ -63,7 +63,7 @@ interface TitleRenderProps {
 const TitleRender: React.FunctionComponent<TitleRenderProps> = ({
   record,
 }: TitleRenderProps) => (
-  <TitleWrapper to={`/conference/${record._id}/dashboard`}>
+  <TitleWrapper to={`/conference/${record._id}/details`}>
     <DateWrapper>
       <div>{moment(record.startDate).format('MMM')}</div>
       <div>{moment(record.startDate).format('D')}</div>

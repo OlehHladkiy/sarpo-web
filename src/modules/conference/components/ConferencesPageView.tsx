@@ -1,9 +1,11 @@
 import { Button } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import LayoutHeader from '@components/LayoutHeader';
+import Footer from '@components/Footer';
 
 import ConferencesTable from './ConferencesTable';
 
@@ -13,24 +15,30 @@ interface ConferencesPageViewProps {
 
 const ConferencesPageView: React.FunctionComponent<ConferencesPageViewProps> = ({
   conferences,
-}: ConferencesPageViewProps) => (
-  <Wrapper>
-    <LayoutHeader />
-    <Content>
-      <TableHeader>
-        <Title>Conferences</Title>
-        <Link to="/conferences/create">
-          <Button type="primary">Create Conference</Button>
-        </Link>
-      </TableHeader>
-      <ConferencesTable conferences={conferences} />
-    </Content>
-  </Wrapper>
-);
+}: ConferencesPageViewProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <Wrapper>
+      <LayoutHeader />
+      <Content>
+        <TableHeader>
+          <Title>{t('Conferences')}</Title>
+          <Link to="/conferences/create">
+            <Button type="primary">{t('Create conference')}</Button>
+          </Link>
+        </TableHeader>
+        <ConferencesTable conferences={conferences} />
+      </Content>
+      <Footer />
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div``;
 
 const Content = styled.div`
+  min-height: calc(100vh - 130px);
   margin: 0 10%;
   padding-top: 50px;
 `;

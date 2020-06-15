@@ -1,43 +1,44 @@
-import { Radio, Form, DatePicker, TimePicker } from 'antd';
+import { Form, DatePicker, TimePicker } from 'antd';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FieldTimeOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 import FormLayout from '../components/FormLayout';
-import { ConferenceDateType } from '../models/conference';
 
-const ConferenceDateForm: React.FunctionComponent = () => (
-  <FormLayout
-    title="Date and time"
-    description="Tell event-goers when your event starts and ends so they can make plans to attend"
-    icon={<FieldTimeOutlined />}
-  >
-    <Title>Frequency</Title>
-    <Form.Item name="dateType">
-      <Radio.Group>
-        <Radio value={ConferenceDateType.Single}>
-          Single Event - Happens once and can last multiple days
-        </Radio>
-        <Radio value={ConferenceDateType.Multiple}>
-          Recurring Events - Repeats or occurs more than once
-        </Radio>
-      </Radio.Group>
-    </Form.Item>
-    <Title>Start and end times</Title>
-    <Form.Item
-      name="date"
-      rules={[{ required: true, message: 'Please select the date' }]}
+const ConferenceDateForm: React.FunctionComponent = () => {
+  const { t } = useTranslation();
+
+  return (
+    <FormLayout
+      title={t('Date and time')}
+      description={t('Date Description')}
+      icon={<FieldTimeOutlined />}
     >
-      <DatePicker.RangePicker autoComplete="off" />
-    </Form.Item>
-    <Form.Item
-      name="time"
-      rules={[{ required: true, message: 'Please select the time' }]}
-    >
-      <TimePicker.RangePicker autoComplete="off" picker="time" format="HH:mm" />
-    </Form.Item>
-  </FormLayout>
-);
+      <Title>{t('Start and end times')}</Title>
+      <Form.Item
+        name="date"
+        rules={[{ required: true, message: t('Date Required') }]}
+      >
+        <DatePicker.RangePicker
+          placeholder={[t('Start Date'), t('End Date')]}
+          autoComplete="off"
+        />
+      </Form.Item>
+      <Form.Item
+        name="time"
+        rules={[{ required: true, message: t('Time Required') }]}
+      >
+        <TimePicker.RangePicker
+          placeholder={[t('Start Time'), t('End Time')]}
+          autoComplete="off"
+          picker="time"
+          format="HH:mm"
+        />
+      </Form.Item>
+    </FormLayout>
+  );
+};
 
 const Title = styled.div`
   margin-top: 24px;
